@@ -19,7 +19,7 @@ string book;
 int main()
 {		
 
-
+	//Menu before login//
 	do {
 		cout << "Log in or Register Account:\n";
 		cout << "\n1. Log in";
@@ -52,10 +52,12 @@ int main()
 		}
 	} while (menu && !dataTrue);
 
+	// Menu after login //
 	while (dataTrue) {
 		cout << "\nChoose an acction:\n";
 		cout << "1. Add Book to system\n";
 		cout << "2. Add Book to user\n";
+		cout << "3. Remove book from user";
 
 		cin >> choice;
 
@@ -63,17 +65,24 @@ int main()
 		{
 		case 1:
 			cout << "Add Book to libary: \n";
-			cin >> book;
+			cin.ignore();
+			getline(cin, book);
 			AddBookToLibary(book);
 			break;
 
 		case 2:
 			cout << "Assign book: \n";
-			cin >> book;
+			cin.ignore();
+			getline(cin, book);
 			AssignBook(login, book);
 			break;
+
+		case 3:
+
+
+			break;
 		default:
-			cout << "Choose 1-2 option";
+			cout << "Choose 1-3 option";
 			break;
 		}
 

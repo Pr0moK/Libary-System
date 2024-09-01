@@ -3,25 +3,43 @@
 #include <Windows.h>
 
 std::ofstream OpenDataBaseW;
-std::string clogin, cpassword;
+std::ifstream OpendataBaseR;
+std::string clogin, cpassword, blogin;
 
-bool loginlen = true;
+bool loginspec = false;
 bool passwordlen = true;
 
 void createuser() {
-	while (loginlen) {
+	do {
+	
 		std::cout << "\nRegistry \n";
 		std::cout << "Provide Login: ";
 		std::cin >> clogin;
 
 		if (clogin.size() >= 4) {
-			break;
+			loginspec = true;
+			OpendataBaseR.open("database.txt");
+			if (OpendataBaseR.is_open()) {
+				while (getline(OpendataBaseR, blogin)) {
+					int space;
+					space = blogin.find(" ");
+					blogin = blogin.substr(0, space);
+					std::cout << blogin << "\n";
+					if (blogin == clogin) {
+						std::cout << "Username " << clogin << " is occupuied, try other one.";
+						loginspec = false;
+
+						break;
+					}
+				}
+			}
+			OpendataBaseR.close();
 		}
 		else {
 			std::cout << "\nLogin must have more than 4 char.\n";
 		}
 
-	}
+	} while (!loginspec);
 
 	std::cout << "\n";
 	while (passwordlen) {
